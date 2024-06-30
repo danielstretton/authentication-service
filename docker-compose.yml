@@ -1,0 +1,21 @@
+services:
+
+  service:
+    depends_on:
+      - db
+    build: .
+    ports:
+      - 4000:4000
+    volumes:
+      - ./:/app
+    environment:
+      DB_URL: mongodb://db/products
+  db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - products:/data/db
+
+volumes:
+  products:
